@@ -4,9 +4,9 @@ from entidad import Entidad
 #Importamos las excepciones personalizadas
 from excepciones import (
     ErrorIdentificacion,
-    ErrorNmbre,
+    ErrorNombre,
     ErrorTelefono,
-    ErrorCorrero
+    ErrorCorreo
 )
 
 #Importamos herramientas para validar los datos
@@ -36,7 +36,7 @@ class Cliente(Entidad):
        @staticmethod
        def validar_nombre(nombre):
           if not isinstance(nombre, str) or not re.fullmatch(r"[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+",nombre.strip()):
-            raise ErrorNmbre("El nombre solo debe contener letras y espacios.")
+            raise ErrorNombre("El nombre solo debe contener letras y espacios.")
     
        #Validamos que la identificación contega entre 6 y 12 dígitos
        @staticmethod
@@ -55,7 +55,7 @@ class Cliente(Entidad):
        def validar_correo(correo):
          patron = r"^[\w\.-]+@[\w\.-]+\.\w+$"
          if not isinstance(correo, str) or not re.fullmatch(patron, correo):
-            raise ErrorCorrero("El correo electrónico no tiene un formato válido.")         
+            raise ErrorCorreo("El correo electrónico no tiene un formato válido.")         
         
         #Métodos para consultar los datos del cliente
        def obtener_nombre(self):

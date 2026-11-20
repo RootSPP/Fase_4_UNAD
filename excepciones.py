@@ -8,7 +8,7 @@ class ErrorIdentificacion(ErrorCliente):
     pass
 
 #Excepción para cuando el nombre no es válido
-class ErrorNmbre(ErrorCliente):
+class ErrorNombre(ErrorCliente):
     pass
 
 #Excepción para cuando el teléfono no es válido
@@ -16,7 +16,7 @@ class ErrorTelefono(ErrorCliente):
     pass
 
 #Excepción para cuando el correo electrónico no es válido
-class ErrorCorrero(ErrorCliente):
+class ErrorCorreo(ErrorCliente):
     pass
 
     
