@@ -1,3 +1,10 @@
+#Importamos herramientas para la fecha y hora del log
+from datetime import datetime
+
+#Archivo donde se registran los eventos y errores del sistema
+ARCHIVO_LOG = "registro_eventos.log"
+
+
 #Clase base para las excepciones personalizadas
 class ErrorCliente(Exception):
     "Excepción base para los errores relacionados con clientes."
@@ -19,4 +26,15 @@ class ErrorTelefono(ErrorCliente):
 class ErrorCorreo(ErrorCliente):
     pass
 
-    
+
+#Función para registrar eventos y errores en el archivo de logs
+def registrar_evento(mensaje):
+    """Escribe un evento o error en el archivo de logs del sistema.
+
+    Cada linea queda con fecha y hora para poder rastrear la secuencia
+    de eventos. El archivo se abre en modo 'append' para no borrar el
+    historial de ejecuciones anteriores.
+    """
+    marca = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(ARCHIVO_LOG, "a", encoding="utf-8") as archivo:
+        archivo.write(f"{marca} [EVENTO] {mensaje}\n")

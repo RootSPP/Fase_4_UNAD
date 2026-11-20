@@ -3,10 +3,12 @@ from entidad import Entidad
 
 #Importamos las excepciones personalizadas
 from excepciones import (
+    ErrorCliente,
     ErrorIdentificacion,
     ErrorNombre,
     ErrorTelefono,
-    ErrorCorreo
+    ErrorCorreo,
+    registrar_evento
 )
 
 #Importamos herramientas para validar los datos
@@ -69,6 +71,33 @@ class Cliente(Entidad):
 
        def obtener_correo(self):
           return self.__correo
+
+      #Propiedades para cumplir el contrato del sistema
+      #(reservas.py usa .nombre y .cedula)
+       @property
+       def nombre(self):
+          return self.__nombre
+
+       @property
+       def cedula(self):
+          return self.__identificacion
+
+      #Validamos todos los datos y dejamos constancia en el log
+       def validar(self):
+          try:
+              self.validar_nombre(self.__nombre)
+              self.validar_identificacion(self.__identificacion)
+              self.validar_telefono(self.__telefono)
+              self.validar_correo(self.__correo)
+          except ErrorCliente as error:
+              registrar_evento(f"[ERROR] Cliente rechazado: {error}")
+              raise
+          else:
+              registrar_evento(
+                  f"[OK] Cliente registrado: {self.__nombre} "
+                  f"(cedula {self.__identificacion})."
+              )
+              return True
 
       #Implementamos el método abstracto heredado de Entidad
        def obtener_informacion(self):
