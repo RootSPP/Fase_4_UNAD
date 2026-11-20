@@ -43,12 +43,13 @@ class _ServicioPrueba:
         return True
 
     def calcular_costo(self, impuesto=0.0, descuento=0.0, **kwargs):
-        """Formula simple de prueba: base + impuesto - descuento.
+        """Formula simple de prueba: base + impuesto - descuento %.
 
-        El calculo real (sobrecargado) vive en el modulo servicios.py.
+        El descuento se maneja como porcentaje (0.0 a 1.0), igual que
+        el servicio real del modulo servicios.py.
         """
         subtotal = self._costo_base * (1 + impuesto)
-        return max(subtotal - descuento, 0.0)
+        return max(subtotal * (1 - descuento), 0.0)
 
 
 def _cabecera(titulo):
@@ -75,13 +76,13 @@ def main():
         )
         reserva = Reserva(cliente, servicio, duracion=3)
 
-        cotizacion = reserva.calcular_total(impuesto=0.19, descuento=10000.0)
-        print(f"Cotizacion (impuesto 19%, descuento 10000): {cotizacion}")
+        cotizacion = reserva.calcular_total(impuesto=0.19, descuento=0.10)
+        print(f"Cotizacion (impuesto 19%, descuento 10%): {cotizacion}")
 
         reserva.confirmar()
         print(f"Estado despues de confirmar: '{reserva.estado}'")
 
-        total = reserva.procesar(impuesto=0.19, descuento=10000.0)
+        total = reserva.procesar(impuesto=0.19, descuento=0.10)
         print(f"Estado despues de procesar: '{reserva.estado}'")
         print(f"Total pagado: {total}")
         print(f"Resumen: {reserva}")
