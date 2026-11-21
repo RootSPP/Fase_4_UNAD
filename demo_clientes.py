@@ -2,14 +2,18 @@
 # Importamos la clase Cliente
 from cliente import Cliente
 
+# Importamos las excepciones propias del modulo de clientes
+from excepciones import ErrorCliente
+
 import sys
 
 
 def main():
     """Ejecuta las 5 pruebas del módulo de clientes (1 válida y 4 inválidas).
 
-    Este archivo lo ejecuta el integrador main.py del sistema, por eso
-    las pruebas viven dentro de la función main().
+    Mejora: se captura la excepcion especifica ErrorCliente (en lugar de
+    Exception) y se indica tras cada error que el sistema continua
+    funcionando, igual que en las otras demos.
     """
     # Configuramos la consola para que muestre bien las tildes
     sys.stdout.reconfigure(encoding="utf-8")
@@ -35,8 +39,9 @@ def main():
             "3001234567",
             "maria@gmail.com"
         )
-    except Exception as error:
+    except ErrorCliente as error:
         print("ERROR AL REGISTRAR CLIENTE:", error)
+        print("El sistema continua funcionando despues del error.")
 
     # Probamos una identificación inválida
     try:
@@ -46,8 +51,9 @@ def main():
             "3001234567",
             "carlos@gmail.com"
         )
-    except Exception as error:
+    except ErrorCliente as error:
         print("ERROR DE IDENTIFICACIÓN:", error)
+        print("El sistema continua funcionando despues del error.")
 
     # Probamos un teléfono inválido
     try:
@@ -57,8 +63,9 @@ def main():
             "123",
             "carlos@gmail.com"
         )
-    except Exception as error:
+    except ErrorCliente as error:
         print("ERROR DE TELÉFONO:", error)
+        print("El sistema continua funcionando despues del error.")
 
     # Probamos un correo electrónico inválido
     try:
@@ -68,8 +75,9 @@ def main():
             "3001234567",
             "carlosgmail.com"
         )
-    except Exception as error:
+    except ErrorCliente as error:
         print("ERROR DE CORREO:", error)
+        print("El sistema continua funcionando despues del error.")
 
 
 if __name__ == "__main__":
