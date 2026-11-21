@@ -1,2 +1,17 @@
+# Python
 __pycache__/
 *.pyc
+.venv/
+venv/
+
+# Logs generados en tiempo de ejecucion (no se versionan)
+registro_eventos.log
+*.log
+
+# Variables de entorno y secretos (NUNCA subir)
+.env
+.env.*
+
+# Editores / IDE
+.idea/
+.vscode/
